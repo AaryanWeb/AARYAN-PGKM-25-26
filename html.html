@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Shopping Cart</title>
+<style>
+p {
+      font-family: 'Times New Roman', serif;
+      font-size: 25px;
+      color: #5F9EA0;
+      font-style: italic;
+     } 
+.sale {
+background: Red;
+color: white;
+text-align: center;
+padding: 20px;
+font-size: 24px;
+animation: blink 1s infinite alternate;
+}
+@keyframes blink {
+ from { opacity: 5; }
+ to { opacity: 0.0; }
+ }
+.card {
+max-width: 600px;
+margin: auto;
+background-color: #F0F8FF;
+padding: 20px;
+border: 2px solid #333;
+border-radius: 8px;
+box-shadow: 3px 3px 30px black;
+}
+.cart {
+margin-top:50px;
+padding:25px;
+ background-color:orange;
+ display: inline-block;
+ border-radius:25px;
+}
+</style>
+</head>
+<body>
+<div class="sale">
+Best Books For Children
+</div>
+
+
+    <h1>Welcome to the Shop!</h1>
+    <p>Click the button to add an item to the cart.</p>
+
+    <div class="item">
+        <p><img src="https://th.bing.com/th/id/OIP.WCWylMlI1axK0MLGKWbsFAHaLH?w=203&h=304&c=7&r=0&o=7&pid=1.7&rm=3" height="300" width="300">Naruto - ₹1000</p>
+        <button onclick="addToCart('Naruto')">Add to Cart</button>
+    </div>
+
+    <div class="item">
+        <p><img src="https://m.media-amazon.com/images/I/81Tf68D4QiL._SL1500_.jpg" height="300" width="300"> F1 Book - ₹Priceless</p>
+        <p>Author: Sir Jackie Stewart</p>
+        <button onclick="addToCart('F1 book')">Add to Cart</button>
+    </div>
+
+    <div class="item">
+        <p><img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1660062770i/61917439.jpg"> Harry Potter - ₹988</p>
+        <p>Author: J.K Rowling</p>
+        <button onclick="addToCart('Harry Potter')">Add to Cart</button>
+    </div>
+<div class="item">
+        <p><img src="https://th.bing.com/th/id/OIP.7ukUlxrE-1LUo4KQwrhoYQHaLH?w=203&h=304&c=7&r=0&o=7&pid=1.7&rm=3"> - ₹500</p>
+        <button onclick="addToCart(''One Piece,)">Add to Cart</button>
+<>
+    </div>
+<div class="item">
+<p> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlGAMaly-ZAlSC5eT1GlMnkiF2XUooezEBNQ&s"> Football - ₹1000</p>
+        <button onclick="addToCart('Football',1000)">Add to Cart</button>
+    </div>
+    <div class="cart">
+        <h3>Shopping Cart</h3>
+        <p id="cartList">Cart is empty</p>
+    </div>
+    <script>
+        let totalAmount = 0;
+
+        function addToCart(item, price) {
+            let cart = document.getElementById("cartList");
+            let total = document.getElementById("totalAmount");
+
+            // Update cart items
+            if (cart.innerHTML === "Cart is empty") {
+                cart.innerHTML = item;
+            } else {
+                cart.innerHTML += ", " + item;
+            }
+
+            // Update total amount
+            totalAmount += price;
+            total.innerHTML = totalAmount;
+        }
+    </script>
+
+</body>
+</html>
