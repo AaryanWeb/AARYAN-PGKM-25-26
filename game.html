@@ -1,0 +1,176 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pixel Jumper</title>
+  <style>
+    body {
+      margin: 0;
+      background: #222;
+      color: white;
+      font-family: monospace;
+      text-align: center;
+    }
+    canvas {
+      display: block;
+      margin: 20px auto;
+      background: #eee;
+      border: 2px solid #444;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pixel Jumper</h1>
+  <p>Use arrow keys to move and jump. Avoid the red blocks!</p>
+  <canvas id="gameCanvas" width="600" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const gravity = 0.5;
+    const friction = 0.8;
+
+    let keys = {};
+
+    let player = {
+      x: 50,
+      y: 300,
+      width: 30,
+      height: 30,
+      velX: 0,
+      velY: 0,
+      speed: 3,
+      jumping: false,
+      grounded: false
+    };
+
+    let platforms = [
+      { x: 0, y: 370, width: 600, height: 30 },
+      { x: 150, y: 300, width: 100, height: 10 },
+      { x: 300, y: 250, width: 100, height: 10 },
+      { x: 450, y: 200, width: 100, height: 10 }
+    ];
+
+    let obstacles = [
+      { x: 200, y: 360, width: 20, height: 10, dir: 1 },
+      { x: 400, y: 190, width: 20, height: 10, dir: -1 }
+    ];
+
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Move player
+      if (keys['ArrowRight']) {
+        if (player.velX < player.speed) player.velX++;
+      }
+      if (keys['ArrowLeft']) {
+        if (player.velX > -player.speed) player.velX--;
+      }
+
+      player.velX *= friction;
+      player.velY += gravity;
+
+      player.grounded = false;
+      for (let plat of platforms) {
+        let dir = colCheck(player, plat);
+        if (dir === 'l' || dir === 'r') {
+          player.velX = 0;
+        } else if (dir === 'b') {
+          player.grounded = true;
+          player.jumping = false;
+          player.velY = 0;
+        } else if (dir === 't') {
+          player.velY *= -1;
+        }
+      }
+
+      if (player.grounded) {
+        player.velY = 0;
+      }
+
+      player.x += player.velX;
+      player.y += player.velY;
+
+      // Draw platforms
+      ctx.fillStyle = '#444';
+      for (let plat of platforms) {
+        ctx.fillRect(plat.x, plat.y, plat.width, plat.height);
+      }
+
+      // Move and draw obstacles
+      ctx.fillStyle = 'red';
+      for (let obs of obstacles) {
+        obs.x += obs.dir * 2;
+        if (obs.x < 0 || obs.x + obs.width > canvas.width) obs.dir *= -1;
+        ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+
+        if (colCheck(player, obs)) {
+          alert('Game Over!');
+          resetGame();
+          return;
+        }
+      }
+
+      // Draw player
+      ctx.fillStyle = 'blue';
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+
+      requestAnimationFrame(update);
+    }
+
+    function colCheck(shapeA, shapeB) {
+      let vX = (shapeA.x + shapeA.width / 2) - (shapeB.x + shapeB.width / 2);
+      let vY = (shapeA.y + shapeA.height / 2) - (shapeB.y + shapeB.height / 2);
+      let hWidths = (shapeA.width / 2) + (shapeB.width / 2);
+      let hHeights = (shapeA.height / 2) + (shapeB.height / 2);
+      let colDir = null;
+
+      if (Math.abs(vX) < hWidths && Math.abs(vY) < hHeights) {
+        let oX = hWidths - Math.abs(vX);
+        let oY = hHeights - Math.abs(vY);
+        if (oX >= oY) {
+          if (vY > 0) {
+            colDir = 't';
+            shapeA.y += oY;
+          } else {
+            colDir = 'b';
+            shapeA.y -= oY;
+          }
+        } else {
+          if (vX > 0) {
+            colDir = 'l';
+            shapeA.x += oX;
+          } else {
+            colDir = 'r';
+            shapeA.x -= oX;
+          }
+        }
+      }
+      return colDir;
+    }
+
+    function resetGame() {
+      player.x = 50;
+      player.y = 300;
+      player.velX = 0;
+      player.velY = 0;
+      score = 0;
+    }
+
+    document.addEventListener('keydown', e => {
+      keys[e.key] = true;
+      if (e.key === 'ArrowUp' && !player.jumping && player.grounded) {
+        player.jumping = true;
+        player.grounded = false;
+        player.velY = -10;
+      }
+    });
+
+    document.addEventListener('keyup', e => {
+      keys[e.key] = false;
+    });
+
+    update();
+  </script>
+</body>
+</html>
