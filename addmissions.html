@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sports Club Admissions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #219150;
+    }
+    #members {
+      margin-top: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .member-card {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sports Club Admissions</h1>
+
+  <form id="admissionForm">
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" required>
+
+    <label for="sport">Sport:</label>
+    <select id="sport" required>
+      <option value="">--Select Sport--</option>
+      <option value="Football">Football,Fees:₹1000/month</option>
+      <option value="Cricket">Cricket,Fees:₹2500/month</option>
+      <option value="Basketball">Basketball,Fees:₹1000/month</option>
+      <option value="Tennis">Tennis,Fees:₹1500/month</option>
+    </select>
+
+    <label for="contact">Contact Number:</label>
+    <input type="text" id="contact" required>
+
+    <button type="submit">Admit Member</button>
+  </form>
+
+  <div id="members">
+    <h2>📋 Admitted Members</h2>
+    <div id="memberList"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('admissionForm');
+    const memberList = document.getElementById('memberList');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const age = document.getElementById('age').value;
+      const sport = document.getElementById('sport').value;
+      const contact = document.getElementById('contact').value;
+
+      const memberCard = document.createElement('div');
+      memberCard.classList.add('member-card');
+      memberCard.innerHTML = `
+        <strong>Name:</strong> ${name}<br>
+        <strong>Age:</strong> ${age}<br>
+        <strong>Sport:</strong> ${sport}<br>
+        <strong>Contact:</strong> ${contact}
+      `;
+
+      memberList.appendChild(memberCard);
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
