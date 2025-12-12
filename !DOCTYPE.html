@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signal Color Change</title>
+    <style>
+        /* Container for the signal */
+        .signal {
+            width: 100px;
+            height: 300px;
+            background-color: black;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+
+        .light {
+            width: 80px;
+            height: 80px;
+            margin: 10px auto;
+            border-radius: 50%;
+            background-color: grey; /* default off */
+        }
+
+        /* Active colors */
+        .red { background-color: red; }
+        .yellow { background-color: yellow; }
+        .green { background-color: green; }
+    </style>
+</head>
+<body>
+
+    <div class="signal">
+        <div id="redLight" class="light"></div>
+        <div id="yellowLight" class="light"></div>
+        <div id="greenLight" class="light"></div>
+    </div>
+
+    <br>
+    <!-- Buttons to change signal color -->
+    <button onclick="changeSignal('red')">Red</button>
+    <button onclick="changeSignal('yellow')">Yellow</button>
+    <button onclick="changeSignal('green')">Green</button>
+
+    <script>
+        function changeSignal(color) {
+            // Reset all lights to grey
+            document.getElementById("redLight").className = "light";
+            document.getElementById("yellowLight").className = "light";
+            document.getElementById("greenLight").className = "light";
+
+            // Turn on the selected light
+            document.getElementById(color + "Light").classList.add(color);
+        }
+    </script>
+
+</body>
+</html>
