@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traffic Signal Simulation</title>
+<style>
+    body {
+        background-color: #222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Traffic light container */
+    .traffic-light {
+        width: 100px;
+        background-color: #333;
+        padding: 20px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    /* Light circles */
+    .light {
+        width: 60px;
+        height: 60px;
+        background-color: #111;
+        border-radius: 50%;
+        opacity: 0.3;
+        transition: opacity 0.5s;
+    }
+
+    .red.active { background-color: red; opacity: 1; }
+    .yellow.active { background-color: yellow; opacity: 1; }
+    .green.active { background-color: green; opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="traffic-light">
+    <div class="light red"></div>
+    <div class="light yellow"></div>
+    <div class="light green"></div>
+</div>
+
+<script>
+    const lights = document.querySelectorAll('.light');
+    let currentIndex = 0;
+
+    function changeLight() {
+        // Remove active class from all lights
+        lights.forEach(light => light.classList.remove('active'));
+
+        // Activate the current light
+        lights[currentIndex].classList.add('active');
+
+        // Set timing for each light
+        let delay;
+        if (currentIndex === 0) delay = 3000; // Red for 3s
+        else if (currentIndex === 1) delay = 1000; // Yellow for 1s
+        else delay = 3000; // Green for 3s
+
+        // Move to next light
+        currentIndex = (currentIndex + 1) % lights.length;
+
+        setTimeout(changeLight, delay);
+    }
+
+    // Start simulation
+    changeLight();
+</script>
+
+</body>
+</html>
