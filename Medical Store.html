@@ -1,0 +1,105 @@
+<html>
+<head>
+    
+    <title>Medical</title>
+  <h1>Aaryan-Da-Medical
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: peachpuff;
+        }
+        h1 {
+            color: blue;
+        }
+        .item {
+            background-color: yellow;
+            border: 2px solid #333;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+        }
+        .cart {
+            margin-top: 20px;
+            padding: 10px;
+            background-color:pink;
+            display: inline-block;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="item">
+        <p>Metformin:- ₹70</p>
+      <p> Used to treat type 2 diabetes, affecting over 77 million people in India.</p>
+        <button onclick="addToCart('Metformin:- ₹70')">Add to Cart</button>
+    </div>
+
+ <div class="item">
+        <p>Amlodipine:- ₹30</p>
+   <p> A common treatment for high blood pressure, affecting around 230 million people.</p>
+        <button onclick="addToCart('Amlodipine:- ₹30')">Add to Cart</button>
+    </div>
+
+ <div class="item">
+        <p>Atorvastatin:- ₹35</p>
+   <p> Used to manage high cholesterol, a leading risk factor for heart disease</p>
+        <button onclick="addToCart('Atorvastatin:- ₹35')">Add to Cart</button>
+    </div>
+
+ <div class="item">
+        <p>Paracetamol:- ₹25</p>
+   <p>Widely used for pain and fever relief, available over the counter.</p>
+        <button onclick="addToCart('Paracetamol:- ₹25')">Add to Cart</button>
+    </div>
+
+ <div class="item">
+        <p>Omeprazole:- ₹30</p>
+   <p>Prescribed for acid reflux and stomach ulcers.</p>
+        <button onclick="addToCart('Omeprazole:- ₹30')">Add to Cart</button>
+
+    </div>
+ <div class="cart">
+
+<div class="item">
+        <p>🚂｡🚋｡🚋｡🚋｡🚋˙⊹⁺toy train - ₹15</p>
+        <button onclick="addToCart('Toy train')">Add to Cart</button>
+    </div>
+ <div class="cart">
+
+  <p>🛫 plane - ₹1500</p>
+        <button onclick="addToCart('Toy plane')">Add to Cart</button>
+    </div>
+ <div class="cart">
+
+<p>🍱 lunch box - ₹1500</p>
+        <button onclick="addToCart('lunch box')">Add to Cart</button>
+    </div>
+ <div class="cart">
+
+
+
+
+<h3>Shopping Cart</h3>
+        <p id="cartList">Cart is empty</p>
+    </div>
+
+    <script>
+        function addToCart(item) {
+            let cart = document.getElementById("cartList");
+            if (cart.innerHTML === "Cart is empty") {
+                cart.innerHTML = item;
+            } else {
+                cart.innerHTML += ", " + item;
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+
+</body>
+</html>
