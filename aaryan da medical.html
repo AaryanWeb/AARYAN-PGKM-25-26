@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aaryan Da Medical</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Lucida-Handwritting;
+            background-color: #00ff7f;
+            color: #3cb371;
+        }
+
+        header {
+            background-color: #008000;
+            color: white;
+            padding: 15px 30px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav a {
+            color: #e9ddff;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            padding: 20px 30px;
+            gap: 30px;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #4a148c;
+        }
+
+        .product {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .product:last-child {
+            border-bottom: none;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #6a1b9a;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #a495c3;
+            margin-right: 6px;
+        }
+
+        button {
+            margin-top: 6px;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #7b1fa2;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4a148c;
+        }
+
+        .clear-btn {
+            background-color: #9c27b0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 12px;
+            background-color: #e8d3ff;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>आर्यन दा मेडिकल</h1>
+    <nav>
+        <a href="#">Home.</a>
+        <a href="#">Medicines.</a>
+        <a href="#">Cart.</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <!-- PRODUCTS -->
+    <div class="box">
+        <h2>Medicines.</h2>
+
+        <div class="product">
+            <strong>Paracetamol</strong><br>
+            Fever & pain relief<br>
+            <span class="price">₹25</span><br>
+            <button onclick="addToCart('Paracetamol', 25.)">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <strong>Cough Syrup</strong><br>
+            Relief from cough<br>
+            <span class="price">₹30</span><br>
+            <button onclick="addToCart('Cough Syrup', 30.)">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <strong>Vitamin Tablets</strong><br>
+            Boost immunity<br>
+            <span class="price">₹45</span><br>
+            <button onclick="addToCart('Vitamin Tablets', 45.)">Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- CART -->
+    <div class="box">
+        <h2>Cart Items.</h2>
+        <ul id="cartList"></ul>
+
+        <button class="clear-btn" onclick="clearCart()">Clear Cart.</button>
+    </div>
+
+</div>
+
+<footer>
+be a daily costumer at आर्यन दा मेडिकल for more discount
+</footer>
+
+<script>
+    let cart = [];
+    let total = 0;
+
+    function addToCart(item, price) {
+        cart.push({ item, price });
+        total += price;
+        updateCart();
+    }
+
+    function updateCart() {
+        const cartList = document.getElementById("cartList");
+        const totalBill = document.getElementById("totalBill");
+
+        cartList.innerHTML = "";
+        cart.forEach(c => {
+            const li = document.createElement("li");
+            li.textContent = `${c.item} - ₹${c.price}`;
+            cartList.appendChild(li);
+        });
+
+        totalBill.textContent = `Total Bill: ₹${total}`;
+    }
+
+    function clearCart() {
+        cart = [];
+        total = 0;
+        updateCart();
+    }
+</script>
+
+</body>
+</html>
