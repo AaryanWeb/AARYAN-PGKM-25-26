@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book a cab</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #219150;
+    }
+    #members {
+      margin-top: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .member-card {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Aaryan-Da-Taxi</h1>
+
+  <form id="admissionForm">
+    <label for="name">Pickup Location:</label>
+    <input type="text" id="name" required>
+
+    <label for="age">Dropp off Location:</label>
+    <input type="text" id="age" required>
+
+    <label for="sport">Vehicle:</label>
+    <select id="sport" required>
+      <option value="">--Select Vehicle--</option>
+      <option value="Sedan">Sedan,₹80/km</option>
+      <option value="SUV">SUV,₹90/km</option>
+      <option value="Rickshaw">Rickshaw,₹40/km</option>
+      <option value="Hatchback">Hatchback,₹70/km</option>
+    </select>
+
+    <label for="contact">Contact Number:</label>
+    <input type="text" id="contact" required>
+
+    <button type="submit">Book!</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('admissionForm');
+    const memberList = document.getElementById('memberList');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('Pickup Location').value;
+      const age = document.getElementById('Drop off Location').value;
+      const sport = document.getElementById('Vehicle').value;
+      const contact = document.getElementById('Contact').value;
+
+      const memberCard = document.createElement('div');
+      memberCard.classList.add('member-card');
+      memberCard.innerHTML = `
+        <strong>Pickup Location:</strong> ${Pickup Location}<br>
+        <strong>Drop off Location:</strong> ${Drop off Location}<br>
+        <strong>Vehicle:</strong> ${Vehicle}<br>
+        <strong>Contact:</strong> ${Contact}
+      `;
+
+      memberList.appendChild(memberCard);
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
